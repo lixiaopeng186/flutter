@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
       ),
       home: new Scaffold(
         appBar: new AppBar(
-          title: new Text("first "),
+          title: new Text("commit  "),
         ),
         body: new Center(
-          child: new Text("hello word "),
+          child: new Text("test main commit   "),
         ),
       )
     );

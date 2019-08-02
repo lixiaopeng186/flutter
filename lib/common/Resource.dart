@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Images{
+  static String test01 ="https://tse1-mm.cn.bing.net/th?id=OET.46ec39334a8e455a83f7586c8af71aab&w=272&h=135&c=7&rs=1&o=5&pid=1.9";
   static String images = "images/";
   //首页
   static String main = images + "main.png";

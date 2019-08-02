@@ -23,6 +23,9 @@ class MyApp extends StatelessWidget {
 
 class _MainTab extends StatefulWidget{
 
+
+  _MainTab();
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -39,6 +42,7 @@ class _MainBottomTab extends State<_MainTab>{
   var _dataIcon ;
   //页面
   var _dataPage;
+  var parentContext;
 
   //按下tab的处理
   void _clickTab(int index){
@@ -56,7 +60,7 @@ class _MainBottomTab extends State<_MainTab>{
       [Images.me_nor,Images.me]
     ];
     _dataPage = [
-      new MainPage(),
+      new MainPage(fContext:parentContext),
       new FindPage(),
       new MindPage()
     ];
@@ -82,6 +86,7 @@ class _MainBottomTab extends State<_MainTab>{
 
   @override
   Widget build(BuildContext context) {
+    parentContext = context;
     _initTab();
     // TODO: implement build
     return new Scaffold(

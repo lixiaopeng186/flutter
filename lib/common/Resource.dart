@@ -11,5 +11,7 @@ class Images{
   static String me = images + "me.png";
   static String me_nor = images +"me_nor.png";
 
+  static String icon_c2c = images + "icon_c2c.png";
+
 
 }

@@ -9,6 +9,9 @@ import 'package:flutter_app_test/widget/TestPage.dart';
 import 'package:flutter_app_test/widget/TextScrollView.dart';
 import 'package:flutter_app_test/page/main/WebTextDetailePage.dart';
 import 'package:flutter_app_test/page/main/FindPage.dart';
+import 'package:flutter_app_test/widget/ManiHorizontalPage.dart';
+import 'package:flutter_app_test/common/Resource.dart';
+
 class MainPage extends StatelessWidget{
    BuildContext fContext;
   MainPage({Key key,this.fContext}):super(key:key);
@@ -22,14 +25,25 @@ class MainPage extends StatelessWidget{
         appBar: new AppBar(
           title: new Text("首页"),
         ),
-        body: new Column(
-          children: <Widget>[
-            //头部banner
-            new _MainHeadPage(),
-            //练习的banner
+        body:new CustomScrollView(
+          shrinkWrap: true,
+          slivers: <Widget>[
+            new SliverList(delegate: new SliverChildListDelegate(
+              <Widget>[
+                    //头部banner
+                    new _MainHeadPage(),
+                    //练习的banner
 //          new TestPageView()
-            //滚动的文字
-            new TextScroll(fContext:fContext),
+                    //滚动的文字
+                    new TextScroll(fContext:fContext),
+                    //添加平行滑动的视图
+                    new MainHorizontalPage(),
+                    //添加中部的view
+                    new _CenterPage(),
+
+
+              ]
+            ))
 
           ],
         ),
@@ -81,7 +95,7 @@ class TextScrollState extends State<TextScroll>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new TextScrollView(datas,100,itemClick: (index,item){
+    return new TextScrollView(datas,50,itemClick: (index,item){
 //      Navigator.of(context).pushNamed("/a");//静态页面传值
     //动态传值
       Navigator.of(widget.fContext).push(new MaterialPageRoute(builder: (context){
@@ -152,4 +166,108 @@ class _MainHead extends State<_MainHeadPage>{
   }
 }
 
+
+//中部的view
+class _CenterPage extends StatefulWidget{
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return new _CenterPageState();
+  }
+
+}
+
+class _CenterPageState extends State<_CenterPage>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Container(
+      padding: new EdgeInsets.only(left: 15,right: 15,top: 0),
+      height: 80,
+      color: Colors.blue,
+      alignment: Alignment.centerLeft,
+      child: new Row(
+        children: <Widget>[
+          _centerTexe()
+        ],
+      )
+//      new Align(
+//        alignment: Alignment.centerLeft,
+//        child:  new Column(
+//          children: <Widget>[
+////          new Text("hehe")
+//            _centerTexe(),
+//          ],
+//        ) ,
+//      )
+//
+
+    );
+  }
+
+  //文字
+  Widget _centerTexe() => new Row(
+//    crossAxisAlignment: CrossAxisAlignment.,
+    children: <Widget>[
+      new Container(
+        width: MediaQuery.of(context).size.width / 1.7,
+//            height: context.size.height,
+        color: Colors.yellow,
+        alignment: Alignment.center,
+        margin: new EdgeInsets.only(top: 10,bottom: 10),
+        child: new Column(
+//                mainAxisAlignment: CrossAxisAlignment.center,
+//                verticalDirection:VerticalDirection.down ,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            new Align(
+              alignment: Alignment.centerLeft,
+              child:  new Text(
+                "第三方场外",
+                style: new TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+
+                ),
+                softWrap: false,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+              ),
+            ),
+            new Align(
+              alignment: Alignment.centerLeft,
+              child:new Text(
+                "安全、快捷的出入境交易",
+                style: new TextStyle(
+                    fontSize: 12,
+                    color: Colors.black54
+                ),
+                softWrap: false,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign:TextAlign.start,
+              ) ,
+            )
+
+          ],
+        ),
+
+      ),
+
+      //右侧图片
+      new Image.asset(
+        Images.icon_c2c,
+        width: 10,
+          height: 50,
+      )
+
+    ],
+
+  );
+
+
+}
 
